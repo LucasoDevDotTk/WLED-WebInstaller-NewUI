@@ -39,8 +39,8 @@ def generate_lookup(VERSIONS_BIN_DIR):
     json_version_data = {}
     # Loop through all the files in the VERSIONS_BIN_DIR
     for filename in os.listdir(VERSIONS_BIN_DIR):
-        filename = filename.replace('.bin', '')
-        parts = filename.split('_')
+        parts = filename.replace('.bin', '')
+        parts = parts.split('_')
         total_files += 1
 
         if 'b' in parts[1]:
