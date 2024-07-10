@@ -1,0 +1,472 @@
+{
+    "0.13.1": {
+        "beta": false,
+        "builds": [
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.13.1_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.13.1_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.13.1_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.13.3": {
+        "beta": false,
+        "builds": [
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.13.3_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.13.3_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.13.3_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.14.0": {
+        "beta": false,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.0_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.0_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.0_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.0_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.0_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.0_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.0_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.14.1": {
+        "beta": false,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.1_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.1_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.1_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.1_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.1_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.1_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.1_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.14.2-b1": {
+        "beta": true,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b1_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b1_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b1_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b1_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b1_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b1_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b1_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.14.2-b2": {
+        "beta": true,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b2_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b2_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b2_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b2_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b2_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b2_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2-b2_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.14.2": {
+        "beta": false,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.2_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.14.3": {
+        "beta": false,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.3_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.3_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.3_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.3_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.3_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.3_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.3_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.14.4": {
+        "beta": false,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.4_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.4_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.4_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.4_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.4_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.4_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.14.4_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.15.0-b1": {
+        "beta": true,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b1_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b1_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b1_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b1_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b1_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b1_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b1_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.15.0-b2": {
+        "beta": true,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b2_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b2_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b2_ESP32-S3_N_8MB.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b2_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b2_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b2_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b2_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.15.0-b3": {
+        "beta": true,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b3_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b3_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b3_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b3_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b3_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b3_ESP8266_N.bin"
+            }
+        ]
+    },
+    "0.15.0-b4": {
+        "beta": true,
+        "builds": [
+            {
+                "chipFamily": "ESP32-C3",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b4_ESP32-C3_N.bin"
+            },
+            {
+                "chipFamily": "ESP32-S2",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b4_ESP32-S2_N.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "A",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b4_ESP32_A.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "E",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b4_ESP32_E.bin"
+            },
+            {
+                "chipFamily": "ESP32",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b4_ESP32_N.bin"
+            },
+            {
+                "chipFamily": "ESP8266",
+                "type": "N",
+                "path": "./bin/WLED_VERSIONS/WLED_0.15.0-b4_ESP8266_N.bin"
+            }
+        ]
+    }
+}
