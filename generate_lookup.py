@@ -39,6 +39,7 @@ def generate_lookup(VERSIONS_BIN_DIR):
     json_version_data = {}
     # Loop through all the files in the VERSIONS_BIN_DIR
     for filename in os.listdir(VERSIONS_BIN_DIR):
+        filename = filename.replace('.bin', '')
         parts = filename.split('_')
         total_files += 1
 
@@ -47,13 +48,20 @@ def generate_lookup(VERSIONS_BIN_DIR):
         else:
             beta = False
 
+        # Check if the filename has 5 parts, if it does, the last part is the file system size
+        if len(parts) == 5:
+            file_system_size = parts[4]
+        else:
+            file_system_size = None
+
         # Check if json_version_data already contains the same version, version is in parts[1]
         if parts[1] in json_version_data:
             # Add the build to the version
             json_version_data[parts[1]]["builds"].append({
                 "chipFamily": parts[2],
-                "type": parts[3][0],
-                "path": f"{VERSIONS_BIN_DIR}/{filename}"
+                "type": parts[3],
+                "path": f"{VERSIONS_BIN_DIR}/{filename}",
+                "file_system_size": file_system_size
             })
         else:
             # Add the version to json_version_data
@@ -63,7 +71,8 @@ def generate_lookup(VERSIONS_BIN_DIR):
                     {
                         "chipFamily": parts[2],
                         "type": parts[3][0],
-                        "path": f"{VERSIONS_BIN_DIR}/{filename}"
+                        "path": f"{VERSIONS_BIN_DIR}/{filename}",
+                        "file_system_size": file_system_size
                     }
                 ]
             }
