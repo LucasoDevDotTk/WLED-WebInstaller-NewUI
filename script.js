@@ -1,17 +1,27 @@
 function setManifest() {
     var sel = document.getElementById("ver");
+    console.log("sel", sel);
+
     var opt = sel.options[sel.selectedIndex];
-    var m = opt.dataset.manifest;
-    var me = opt.dataset.ethernet;
-    var ma = opt.dataset.audio;
-    var mt = opt.dataset.test;
+    console.log("opt", opt);
+    // var m = opt.dataset.manifest;
+    // console.log("m",m);
+    // var me = opt.dataset.ethernet;
+    // console.log("me", me);
+    // var ma = opt.dataset.audio;
+    // console.log("ma",ma)
+    // var mt = opt.dataset.test;
+    // console.log("mt", mt)
 
     //handle ethernet checkbox
-    m = handleCheckbox(m, me, "ethernet");
+    // m = handleCheckbox(m, me, "ethernet");
     //handle audioreactive checkbox
-    m = handleCheckbox(m, ma, "audio");
+    // m = handleCheckbox(m, ma, "audio");
     //handle audioreactive checkbox
-    m = handleCheckbox(m, mt, "test");
+    // m = handleCheckbox(m, mt, "test");
+
+    m =
+        '{"name": "WLED","version": "0.15.0-b2/2404100 audio","home_assistant_domain": "wled","builds": [{"chipFamily": "ESP32","parts": [{ "path": "/bin/beta_0_15_0-b2/esp32_bootloader_v4.bin", "offset": 0 },{ "path": "/bin/beta_0_15_0-b2/WLED_0.15.0-b2_ESP32_audioreactive.bin", "offset": 65536 }]}]}';
 
     document.getElementById("inst").setAttribute("manifest", m);
     document.getElementById("verstr").textContent = opt.text;
@@ -101,3 +111,39 @@ function showSerialHelp() {
         </div>`;
     }
 }
+
+function showVersionsSelection() {
+    console.log("showVersionsSelection");
+    // Go through versions_lookup.json, and show the versions in the dropdown
+    fetch("version_lookup.json")
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("data", data);
+            var betaOptgroup = document.getElementById("betaOptgroup");
+            var releaseOptgroup = document.getElementById("releaseOptgroup");
+            
+            for (var key in data) {
+                console.log(key, data[key]);
+                // Check if beta == false
+                if (!data[key].beta) {
+                    console.log("Not beta version", data[key]);
+                    var opt = document.createElement("option");
+                    opt.value = key;
+                    opt.text = key;
+                    opt.dataset.manifest = JSON.stringify(data[key]);
+                    releaseOptgroup.appendChild(opt);
+                }
+
+                if (data[key].beta) {
+                    console.log("Beta version", data[key]);
+                    var opt = document.createElement("option");
+                    opt.value = key;
+                    opt.text = key;
+                    opt.dataset.manifest = JSON.stringify(data[key]);
+                    betaOptgroup.appendChild(opt);
+                }
+            }
+        });
+}
+
+showVersionsSelection();
