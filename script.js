@@ -1,36 +1,78 @@
 function setManifest() {
     var sel = document.getElementById("ver");
-    console.log("sel", sel);
 
+    // Get which version is selected
     var opt = sel.options[sel.selectedIndex];
-    console.log("opt", opt);
-    // var m = opt.dataset.manifest;
-    // console.log("m",m);
-    // var me = opt.dataset.ethernet;
-    // console.log("me", me);
-    // var ma = opt.dataset.audio;
-    // console.log("ma",ma)
-    // var mt = opt.dataset.test;
-    // console.log("mt", mt)
+
+    // Get the manifest from the selected version
+    optManifest = opt.dataset.manifest;
+    optManifest = JSON.parse(optManifest);
+    
+    // Go through the builds and set ethernet, audio, and plain to true if available
+    ethernetCompatible = false;
+    audioCompatible = false;
+    plainCompatible = false;
+
+    for (var i in optManifest.builds) {
+        
+        build = optManifest.builds[i];
+        
+        if (build.type == "E") {
+            ethernetCompatible = true;
+            me = build.path;
+        }
+        if (build.type == "A") {
+            audioCompatible = true;
+            ma = build.path;
+        }
+        if (build.type == "N") {
+            plainCompatible = true;
+            mp = build.path;
+        }
+    }
+
 
     //handle ethernet checkbox
-    // m = handleCheckbox(m, me, "ethernet");
+    ethernetSelected = handleCheckbox(ethernetCompatible, "ethernet");
     //handle audioreactive checkbox
-    // m = handleCheckbox(m, ma, "audio");
+    audioSelected = handleCheckbox(audioCompatible, "audio");
     //handle audioreactive checkbox
-    // m = handleCheckbox(m, mt, "test");
+    plainSelected = handleCheckbox(plainCompatible, "normal");
 
-    m =
-        '{"name": "WLED","version": "0.15.0-b2/2404100 audio","home_assistant_domain": "wled","builds": [{"chipFamily": "ESP32","parts": [{ "path": "/bin/beta_0_15_0-b2/esp32_bootloader_v4.bin", "offset": 0 },{ "path": "/bin/beta_0_15_0-b2/WLED_0.15.0-b2_ESP32_audioreactive.bin", "offset": 65536 }]}]}';
+    version = opt.value;
 
-    document.getElementById("inst").setAttribute("manifest", m);
+    selectedType = null
+    selectedTypeName = null
+
+    if (ethernetSelected) {
+        selectedType = "E";
+        selectedTypeName = "ethernet";
+    }
+    if (audioSelected) {
+        selectedType = "A";
+        selectedTypeName = "audio";
+    }
+    if (plainSelected) {
+        selectedType = "N";
+        selectedTypeName = "plain";
+    }
+
+    // Make a string based manifest
+    m = '{"name": "WLED","version": "' + version + " " + selectedTypeName +'","home_assistant_domain": "wled","builds": [';
+
+    console.log(m)
+
+    // m =
+    //     '{"name": "WLED","version": "0.15.0-b2/2404100 audio","home_assistant_domain": "wled","builds": [{"chipFamily": "ESP32","parts": [{ "path": "/bin/beta_0_15_0-b2/esp32_bootloader_v4.bin", "offset": 0 },{ "path": "/bin/beta_0_15_0-b2/WLED_0.15.0-b2_ESP32_audioreactive.bin", "offset": 65536 }]}]}';
+
+    // document.getElementById("inst").setAttribute("manifest", m);
     document.getElementById("verstr").textContent = opt.text;
 }
 
-function handleCheckbox(manifest, checkboxmanifest, primaryCheckbox) {
+function handleCheckbox(supported, primaryCheckbox) {
     //Check if specified manifest is available
 
-    if (!checkboxmanifest) {
+    if (!supported) {
         document.getElementById(primaryCheckbox).disabled = true;
         document
             .getElementById(primaryCheckbox + "_label")
@@ -47,10 +89,9 @@ function handleCheckbox(manifest, checkboxmanifest, primaryCheckbox) {
             .classList.add("radio__label");
     }
 
-    if (checkboxmanifest && document.getElementById(primaryCheckbox).checked) {
-        manifest = checkboxmanifest;
+    if (document.getElementById(primaryCheckbox).checked) {
+        return true
     }
-    return manifest;
 }
 
 function resetCheckboxes() {
@@ -113,29 +154,24 @@ function showSerialHelp() {
 }
 
 function showVersionsSelection() {
-    console.log("showVersionsSelection");
     // Go through versions_lookup.json, and show the versions in the dropdown
     fetch("version_lookup.json")
         .then((response) => response.json())
         .then((data) => {
-            console.log("data", data);
             var betaOptgroup = document.getElementById("betaOptgroup");
             var releaseOptgroup = document.getElementById("releaseOptgroup");
             
             for (var key in data) {
-                console.log(key, data[key]);
-                // Check if beta == false
+                // Check if release
                 if (!data[key].beta) {
-                    console.log("Not beta version", data[key]);
                     var opt = document.createElement("option");
                     opt.value = key;
                     opt.text = key;
                     opt.dataset.manifest = JSON.stringify(data[key]);
                     releaseOptgroup.appendChild(opt);
                 }
-
+                // Check if beta
                 if (data[key].beta) {
-                    console.log("Beta version", data[key]);
                     var opt = document.createElement("option");
                     opt.value = key;
                     opt.text = key;
