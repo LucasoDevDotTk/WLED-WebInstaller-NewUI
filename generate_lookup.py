@@ -60,7 +60,7 @@ def generate_lookup(VERSIONS_BIN_DIR):
             json_version_data[parts[1]]["builds"].append({
                 "chipFamily": parts[2],
                 "type": parts[3],
-                "path": f"{VERSIONS_BIN_DIR}/{filename}",
+                "path": f"bin/WLED_VERSIONS/{filename}",
                 "file_system_size": file_system_size
             })
         else:
@@ -71,7 +71,7 @@ def generate_lookup(VERSIONS_BIN_DIR):
                     {
                         "chipFamily": parts[2],
                         "type": parts[3][0],
-                        "path": f"{VERSIONS_BIN_DIR}/{filename}",
+                        "path": f"bin/WLED_VERSIONS/{filename}",
                         "file_system_size": file_system_size
                     }
                 ]

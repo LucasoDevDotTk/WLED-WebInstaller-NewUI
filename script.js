@@ -5,18 +5,17 @@ function setManifest() {
     var opt = sel.options[sel.selectedIndex];
 
     // Get the manifest from the selected version
-    optManifest = opt.dataset.manifest;
+    var optManifest = opt.dataset.manifest;
     optManifest = JSON.parse(optManifest);
-    
+
     // Go through the builds and set ethernet, audio, and plain to true if available
-    ethernetCompatible = false;
-    audioCompatible = false;
-    plainCompatible = false;
+    var ethernetCompatible = false;
+    var audioCompatible = false;
+    var plainCompatible = false;
 
     for (var i in optManifest.builds) {
-        
         build = optManifest.builds[i];
-        
+
         if (build.type == "E") {
             ethernetCompatible = true;
             me = build.path;
@@ -31,18 +30,17 @@ function setManifest() {
         }
     }
 
-
     //handle ethernet checkbox
-    ethernetSelected = handleCheckbox(ethernetCompatible, "ethernet");
+    var ethernetSelected = handleCheckbox(ethernetCompatible, "ethernet");
     //handle audioreactive checkbox
-    audioSelected = handleCheckbox(audioCompatible, "audio");
+    var audioSelected = handleCheckbox(audioCompatible, "audio");
     //handle audioreactive checkbox
-    plainSelected = handleCheckbox(plainCompatible, "normal");
+    var plainSelected = handleCheckbox(plainCompatible, "normal");
 
-    version = opt.value;
+    var version = opt.value;
 
-    selectedType = null
-    selectedTypeName = null
+    var selectedType = null;
+    var selectedTypeName = null;
 
     if (ethernetSelected) {
         selectedType = "E";
@@ -57,15 +55,90 @@ function setManifest() {
         selectedTypeName = "plain";
     }
 
-    // Make a string based manifest
-    m = '{"name": "WLED","version": "' + version + " " + selectedTypeName +'","home_assistant_domain": "wled","builds": [';
+    var manifest = null;
 
-    console.log(m)
+    // Make a string based manifest for ethernet boards
+    if (selectedTypeName == "ethernet") {
+        builds = [];
+        for (var i in optManifest.builds) {
+            if (optManifest.builds[i].type == selectedType) {
+                console.log(optManifest.builds[i]);
 
-    // m =
-    //     '{"name": "WLED","version": "0.15.0-b2/2404100 audio","home_assistant_domain": "wled","builds": [{"chipFamily": "ESP32","parts": [{ "path": "/bin/beta_0_15_0-b2/esp32_bootloader_v4.bin", "offset": 0 },{ "path": "/bin/beta_0_15_0-b2/WLED_0.15.0-b2_ESP32_audioreactive.bin", "offset": 65536 }]}]}';
+                if (optManifest.builds[i].chipFamily == "ESP32") {
+                    esp32BuildManifest = `{
+                    "chipFamily": "ESP32",
+                    "parts": [
+                        { "path": "esp32_bootloader_v4.bin", "offset": 0 },
+                        { "path": "${optManifest.builds[i].path}", "offset": 65536 }
+                    ]
+                    }`;
+                    builds.push(esp32BuildManifest);
+                }
 
-    // document.getElementById("inst").setAttribute("manifest", m);
+                if (optManifest.builds[i].chipFamily == "ESP8266") {
+                    esp8266BuildManifest = `{
+                    "chipFamily": "ESP8266",
+                    "parts": [
+                        { "path": "${optManifest.builds[i].path}", "offset": 0 }
+                    ]
+                    }`;
+                    builds.push(esp8266BuildManifest);
+                }
+            }
+        }
+        manifest = `{"name": "WLED","version": "${version} ${selectedTypeName}","home_assistant_domain": "wled","builds": [${builds}]}`;
+    }
+
+    if (selectedTypeName == "audio") {
+        manifest = `{"name": "WLED","version": "${version} ${selectedTypeName}","home_assistant_domain": "wled","builds": [{"chipFamily": "ESP32","parts": [{ "path": "${ma}", "offset": 0 }]}]}`;
+    }
+
+    if (selectedTypeName == "plain") {
+        builds = [];
+        for (var i in optManifest.builds) {
+            if (optManifest.builds[i].type == selectedType) {
+                console.log(optManifest.builds[i]);
+    
+                if (optManifest.builds[i].chipFamily == "ESP32") {
+                    var esp32BuildManifest = {
+                        "chipFamily": "ESP32",
+                        "parts": [
+                            { "path": new URL("bin/bootloaders/esp32_bootloader_v4.bin", window.location.href), "offset": 0 },
+                            { "path": new URL(optManifest.builds[i].path, window.location.href), "offset": 65536 }
+                        ]
+                    };
+                    builds.push(esp32BuildManifest);
+                }
+    
+                if (optManifest.builds[i].chipFamily == "ESP8266") {
+                    var esp8266BuildManifest = {
+                        "chipFamily": "ESP8266",
+                        "parts": [
+                            { "path": new URL(optManifest.builds[i].path, window.location.href), "offset": 0 }
+                        ]
+                    };
+                    builds.push(esp8266BuildManifest);
+                }
+            }
+        }
+        var manifest = {
+            "name": "WLED",
+            "version": version + " " + selectedTypeName,
+            "home_assistant_domain": "wled",
+            "builds": builds
+        };
+    }
+    
+
+    console.log(manifest);
+
+    const manifestString = JSON.stringify(manifest);
+    const base64Manifest = btoa(manifestString);
+    const dataUrl = `data:application/json;base64,${base64Manifest}`;
+
+    console.log(dataUrl)
+    
+    document.getElementById("inst").setAttribute("manifest", dataUrl);
     document.getElementById("verstr").textContent = opt.text;
 }
 
@@ -90,7 +163,7 @@ function handleCheckbox(supported, primaryCheckbox) {
     }
 
     if (document.getElementById(primaryCheckbox).checked) {
-        return true
+        return true;
     }
 }
 
@@ -160,7 +233,7 @@ function showVersionsSelection() {
         .then((data) => {
             var betaOptgroup = document.getElementById("betaOptgroup");
             var releaseOptgroup = document.getElementById("releaseOptgroup");
-            
+
             for (var key in data) {
                 // Check if release
                 if (!data[key].beta) {
