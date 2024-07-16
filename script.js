@@ -3,6 +3,10 @@ const ESP32C3BootloaderPath = "bin/bootloaders/esp32-c3_bootloader_v2.bin";
 const ESP32S3BootloaderPath = "bin/bootloaders/esp32-s3_bootloader_v2.bin";
 const ESP32S2BootloaderPath = "bin/bootloaders/esp32-s2_bootloader_v2.bin";
 
+const ESP32C3_4MB_part = "bin/partitions/partitions_c3_4m.bin";
+const ESP32S2_4MB_part = "bin/partitions/partitions_s2_4m.bin";
+const ESP32S3_8MB_part = "bin/partitions/partitions_s3_8m.bin";
+
 function setManifest() {
     var sel = document.getElementById("ver");
 
@@ -128,12 +132,12 @@ function setManifest() {
 
 function generateBuildManifest(optManifest, optManifestIndex) {
     if (optManifest.builds[optManifestIndex].chipFamily == "ESP32") {
-        var esp32BuildManifest = {
+        let esp32BuildManifest = {
             chipFamily: "ESP32",
             parts: [
                 {
                     path: new URL(
-                        "bin/bootloaders/esp32_bootloader_v4.bin",
+                        ESP32BootloaderPath,
                         window.location.href
                     ),
                     offset: 0,
@@ -150,8 +154,42 @@ function generateBuildManifest(optManifest, optManifestIndex) {
         return esp32BuildManifest;
     }
 
+    if (optManifest.builds[optManifestIndex].chipFamily == "ESP32-C3") {
+        let esp32C3BuildManifest = {
+            chipFamily: "ESP32-C3",
+            parts: [
+                {"path": new URL(ESP32C3BootloaderPath, window.location.href), "offset": 0},
+                {"path:": new URL(optManifest.builds[optManifestIndex].path, window.location.href), "offset": 65536},
+            ],
+        }
+        return esp32C3BuildManifest;
+    }
+
+    if (optManifest.builds[optManifestIndex].chipFamily == "ESP32-S2") {
+        let esp32S2BuildManifest = {
+            chipFamily: "ESP32-S2",
+            parts: [
+                {"path": new URL(ESP32S2BootloaderPath, window.location.href), "offset": 0},
+                {"path": new URL(ESP32S2_4MB_part, window.location.href), "offset": 32.768},
+                {"path": new URL(optManifest.builds[optManifestIndex].path, window.location.href), "offset": 65536},
+            ]
+        };
+        return esp32S2BuildManifest;
+    }
+
+    if (optManifest.builds[optManifestIndex].chipFamily == "ESP32-S3") {
+        let esp32S3BuildManifest = {
+            chipFamily: "ESP32-S3",
+            parts: [
+                {"path": new URL(ESP32S3BootloaderPath, window.location.href), "offset": 0},
+                {"path": new URL(optManifest.builds[optManifestIndex].path, window.location.href), "offset": 65536},
+            ]
+        };
+        return esp32S3BuildManifest;
+    }
+
     if (optManifest.builds[optManifestIndex].chipFamily == "ESP8266") {
-        var esp8266BuildManifest = {
+        let esp8266BuildManifest = {
             chipFamily: "ESP8266",
             parts: [
                 {
