@@ -118,7 +118,7 @@ function setManifest() {
         };
     }
 
-    console.log(JSON.stringify(manifest));
+    console.log(JSON.stringify(manifest, null, 2));
 
     const manifestString = JSON.stringify(manifest);
     const base64Manifest = btoa(manifestString);
