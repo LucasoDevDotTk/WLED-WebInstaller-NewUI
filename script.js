@@ -1,3 +1,8 @@
+const ESP32BootloaderPath = "bin/bootloaders/esp32_bootloader_v4.bin";
+const ESP32C3BootloaderPath = "bin/bootloaders/esp32-c3_bootloader_v2.bin";
+const ESP32S3BootloaderPath = "bin/bootloaders/esp32-s3_bootloader_v2.bin";
+const ESP32S2BootloaderPath = "bin/bootloaders/esp32-s2_bootloader_v2.bin";
+
 function setManifest() {
     var sel = document.getElementById("ver");
 
@@ -62,84 +67,104 @@ function setManifest() {
         builds = [];
         for (var i in optManifest.builds) {
             if (optManifest.builds[i].type == selectedType) {
-                console.log(optManifest.builds[i]);
-
-                if (optManifest.builds[i].chipFamily == "ESP32") {
-                    esp32BuildManifest = `{
-                    "chipFamily": "ESP32",
-                    "parts": [
-                        { "path": "esp32_bootloader_v4.bin", "offset": 0 },
-                        { "path": "${optManifest.builds[i].path}", "offset": 65536 }
-                    ]
-                    }`;
-                    builds.push(esp32BuildManifest);
-                }
-
-                if (optManifest.builds[i].chipFamily == "ESP8266") {
-                    esp8266BuildManifest = `{
-                    "chipFamily": "ESP8266",
-                    "parts": [
-                        { "path": "${optManifest.builds[i].path}", "offset": 0 }
-                    ]
-                    }`;
-                    builds.push(esp8266BuildManifest);
-                }
+                let build = generateBuildManifest(optManifest, i);
+                builds.push(build);
             }
         }
-        manifest = `{"name": "WLED","version": "${version} ${selectedTypeName}","home_assistant_domain": "wled","builds": [${builds}]}`;
+
+        var manifest = {
+            name: "WLED",
+            version: version + " " + selectedTypeName,
+            home_assistant_domain: "wled",
+            builds: builds,
+        };
     }
 
     if (selectedTypeName == "audio") {
-        manifest = `{"name": "WLED","version": "${version} ${selectedTypeName}","home_assistant_domain": "wled","builds": [{"chipFamily": "ESP32","parts": [{ "path": "${ma}", "offset": 0 }]}]}`;
+        builds = [];
+        for (var i in optManifest.builds) {
+            if (optManifest.builds[i].type == selectedType) {
+                let build = generateBuildManifest(optManifest, i);
+                builds.push(build);
+            }
+        }
+
+        var manifest = {
+            name: "WLED",
+            version: version + " " + selectedTypeName,
+            home_assistant_domain: "wled",
+            builds: builds,
+        };
     }
 
     if (selectedTypeName == "plain") {
         builds = [];
         for (var i in optManifest.builds) {
             if (optManifest.builds[i].type == selectedType) {
-                console.log(optManifest.builds[i]);
-    
-                if (optManifest.builds[i].chipFamily == "ESP32") {
-                    var esp32BuildManifest = {
-                        "chipFamily": "ESP32",
-                        "parts": [
-                            { "path": new URL("bin/bootloaders/esp32_bootloader_v4.bin", window.location.href), "offset": 0 },
-                            { "path": new URL(optManifest.builds[i].path, window.location.href), "offset": 65536 }
-                        ]
-                    };
-                    builds.push(esp32BuildManifest);
-                }
-    
-                if (optManifest.builds[i].chipFamily == "ESP8266") {
-                    var esp8266BuildManifest = {
-                        "chipFamily": "ESP8266",
-                        "parts": [
-                            { "path": new URL(optManifest.builds[i].path, window.location.href), "offset": 0 }
-                        ]
-                    };
-                    builds.push(esp8266BuildManifest);
-                }
+                let build = generateBuildManifest(optManifest, i);
+                builds.push(build);
             }
         }
+
         var manifest = {
-            "name": "WLED",
-            "version": version + " " + selectedTypeName,
-            "home_assistant_domain": "wled",
-            "builds": builds
+            name: "WLED",
+            version: version + " " + selectedTypeName,
+            home_assistant_domain: "wled",
+            builds: builds,
         };
     }
-    
 
-    console.log(manifest);
+    console.log(JSON.stringify(manifest));
 
     const manifestString = JSON.stringify(manifest);
     const base64Manifest = btoa(manifestString);
     const dataUrl = `data:application/json;base64,${base64Manifest}`;
 
-    console.log(dataUrl)
-    
+    console.log(dataUrl);
+
     document.getElementById("inst").setAttribute("manifest", dataUrl);
     document.getElementById("verstr").textContent = opt.text;
+}
+
+function generateBuildManifest(optManifest, optManifestIndex) {
+    if (optManifest.builds[optManifestIndex].chipFamily == "ESP32") {
+        var esp32BuildManifest = {
+            chipFamily: "ESP32",
+            parts: [
+                {
+                    path: new URL(
+                        "bin/bootloaders/esp32_bootloader_v4.bin",
+                        window.location.href
+                    ),
+                    offset: 0,
+                },
+                {
+                    path: new URL(
+                        optManifest.builds[optManifestIndex].path,
+                        window.location.href
+                    ),
+                    offset: 65536,
+                },
+            ],
+        };
+        return esp32BuildManifest;
+    }
+
+    if (optManifest.builds[optManifestIndex].chipFamily == "ESP8266") {
+        var esp8266BuildManifest = {
+            chipFamily: "ESP8266",
+            parts: [
+                {
+                    path: new URL(
+                        optManifest.builds[optManifestIndex].path,
+                        window.location.href
+                    ),
+                    offset: 0,
+                },
+            ],
+        };
+        return esp8266BuildManifest;
+    }
 }
 
 function handleCheckbox(supported, primaryCheckbox) {
