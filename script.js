@@ -7,6 +7,9 @@ const ESP32C3_4MB_part = "bin/partitions/partitions_c3_4m.bin";
 const ESP32S2_4MB_part = "bin/partitions/partitions_s2_4m.bin";
 const ESP32S3_8MB_part = "bin/partitions/partitions_s3_8m.bin";
 
+// REMOVE IN PROD
+alert("This is a beta version of the WLED Flasher. Please report any issues to https://github.com/LucasoDevDotTk/WLED-WebInstaller-NewUI");
+
 function setManifest() {
     var sel = document.getElementById("ver");
 
